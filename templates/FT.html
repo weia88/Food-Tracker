@@ -3,36 +3,43 @@
   <head>
     <title>Food Tracker 2021</title>
 
-    <link href="static/FT.css" rel="stylesheet" type="text/css" />
-    <script src="static/FT.js" type="text/javascript"></script>
+    <link href="/static/FT.css" rel="stylesheet" type="text/css" />
+    <script src="/static/FT.js" type="text/javascript"></script>
   </head>
 
   <body>
     <p> Hi Hakim</p>
-  </body>
 
-  <div id="form">
+
+  <div id="form1" onsubmit="return false">
     <label for="Food Item">Food Item:</label><br>
-    <input id="food_item" type="text"name="food_item"><br>
+    <input id="food_item" type="text" name="food_item"><br>
     
     <label for="Date">Date:</label><br>
     <input  id="date" type="text" name="date"><br>
     
     <label for="Time of Day">Time of Day:</label><br>
-    <input id="time_of_day" type="text" name="time_of_day"><br>
+    <input id="time_of_day" type="number" name="time_of_day"><br>
     
     <label for="Calories">Calories Estimate:</label><br>
     <input id="calories" type="number" name="calories"><br>
+      
+    <input type="button" name="submit_button" onclick="updateTracker();" value="submit"> 
+  </div>  
+
+  
+  <!-- <script>
+    Not working - On enter press submit form
+    var input = document.getElementById("calories");
+    input.addEventListener("keyup", function(event){
+      if (event.keyCode === 13){
+        event.preventDefault();
+        document.getElementById("submit_button").click();
+      }
+    })
+  </script> -->
 
 
-    <button id="submit_button">Submit Entry</button>
-  </div>
-
-
-
-
-
-
-
+</body>
 </html>
 
