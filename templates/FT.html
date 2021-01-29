@@ -5,12 +5,14 @@
 
     <link href="/static/FT.css" rel="stylesheet" type="text/css" />
     <script src="/static/FT.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" 
+      type="text/javascript"></script> 
   </head>
 
   <body>
-    <p> Hi Hakim</p>
-
-
+    <p>Hi Hakim</p>
+  </body>
+    
   <div id="form1" onsubmit="return false">
     <label for="Food Item">Food Item:</label><br>
     <input id="food_item" type="text" name="food_item"><br>
@@ -24,9 +26,14 @@
     <label for="Calories">Calories Estimate:</label><br>
     <input id="calories" type="number" name="calories"><br>
       
-    <input type="button" name="submit_button" onclick="updateTracker();" value="submit"> 
+    <input type="button" name="submit_button" onclick="AddEntry();" value="submit"> 
+    <input type="button" name="button" onclick="ReadJsonFile();" value="read">
+    <input type="button" name="button" onclick="throwaway();" value="display">
   </div>  
 
+  <div id="wrapper">
+  
+  </div>
   
   <!-- <script>
     Not working - On enter press submit form
@@ -40,6 +47,5 @@
   </script> -->
 
 
-</body>
 </html>
 
