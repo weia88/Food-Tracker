@@ -1,5 +1,7 @@
 "use strict";
 
+window.file_content = null; //global
+
 // update the main food tracker --> submitting a new entry
 function AddEntry(){
     var food = document.getElementById("food_item").value;
@@ -7,13 +9,11 @@ function AddEntry(){
     var time = document.getElementById("time_of_day").value;
     var calories = document.getElementById("calories").value;
     
-    // var check = isFormComplete(food, date, time, calories);
-    // if (check){
-    //     ResetForm();
-    // }
-
-    // Check if existing json file exists, if does then update and write to that
-    // Else, create json and write to that
+    var check = isFormComplete(food, date, time, calories);
+    if (check){
+        //does a JSON file exist?
+        ResetForm();
+    }
 
     
 }
@@ -64,7 +64,6 @@ function isFormComplete(food, date, time, calories){
 // Reads the Json file in explorer 
 function ReadJsonFile(){
     var url = "/Example.json";
-    var file_content;
     $.ajax({
         type:"GET",
         url: url,
@@ -77,30 +76,6 @@ function ReadJsonFile(){
         async: false  
     });
     return file_content;
-    
-    // var test;
-    //     $.getJSON("/Example.json", function(data){
-    //         var temp = JSON.stringify(data);
-    //         var parsedJSON = JSON.parse(temp);
-    //         test = parsedJSON;
-    //     });
-
-
-
-
-    //     var dict = {};
-//     var jsonFile = $.getJSON("/Example.json", function(data) {
-//         $.each(data, function(key, value){
-//             var k = key;
-//             dict["k"] = [];
-//             $.each(value, function(index, value){
-//                 $.each(value, function(key, value){
-//                     console.log(key + "---" + value);
-//                     dict["k"].push  
-//                 });
-//             });  
-//         });
-//     });
 }
 
 function WriteJsonFile(x, y, z, a){
@@ -108,13 +83,13 @@ function WriteJsonFile(x, y, z, a){
 }
 
 // Displays the content of the JsonFile into the wrapper container
-function DisplayJsonFile(input_list){
+function DisplayJsonFile(){
     var wrapper = $("#wrapper"), container;
-    for (var key in input_list){
+    for (var key in file_content){
         container = $('<div id="list_displayed" class="container"></div>');
         wrapper.append(container);
         container.append('<div class="date">' + key + '</div>');
-        for (const dict of input_list[key]){
+        for (const dict of file_content[key]){
             container.append('<div class="name">' + dict.name + '</div>');
             container.append('<div class="time">' + dict.time + '</div>');
             container.append('<div class="calories">' + dict.calories + " Cals" + '</div>');
@@ -126,6 +101,5 @@ function DisplayJsonFile(input_list){
 // A function temporary used to call functions
 function throwaway(){
     var temp = ReadJsonFile();
-    console.log(temp);
     DisplayJsonFile(temp);
 }
