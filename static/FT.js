@@ -12,9 +12,9 @@ function AddEntry(){
     var check = isFormComplete(food, date, time, calories);
     if (check){
         //does a JSON file exist?
+        WriteJsonFile(food, date, time, calories); // Is this function neccessary?
         ResetForm();
     }
-
     
 }
 
@@ -78,8 +78,26 @@ function ReadJsonFile(){
     return file_content;
 }
 
+// Adds element to a date
+// ToDo: Does not order array based on time of day*
+// Below code does not work, Writing to local file system is not allowed...without effort
+
 function WriteJsonFile(x, y, z, a){
-    
+    var foodItem = x;
+    var dateKey = y; // Aka key
+    var timeValue = z;
+    var calValue= Number(a);
+
+    if (dateKey in file_content){
+        //add under existing key
+        file_content[dateKey].push({name: foodItem, time: timeValue, calories: calValue});
+    } else {
+        //add key/date and elements under key 
+    }
+
+    // localStorage.setItem('Example', JSON.stringify(file_content));
+    // var retrieved = localStorage.getItem('/Example1');
+    // console.log(JSON.parse(retrieved));
 }
 
 // Displays the content of the JsonFile into the wrapper container
@@ -93,7 +111,6 @@ function DisplayJsonFile(){
             container.append('<div class="name">' + dict.name + '</div>');
             container.append('<div class="time">' + dict.time + '</div>');
             container.append('<div class="calories">' + dict.calories + " Cals" + '</div>');
-
         }
     }
 }
